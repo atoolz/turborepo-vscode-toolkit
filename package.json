@@ -2,7 +2,7 @@
   "name": "turborepo-vscode-toolkit",
   "displayName": "Turborepo Toolkit",
   "description": "Complete Turborepo toolkit: IntelliSense, task explorer, pipeline visualization, and diagnostics for turbo.json",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "atoolz",
   "license": "MIT",
   "icon": "assets/icon.png",
