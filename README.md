@@ -15,19 +15,19 @@ Complete Turborepo toolkit for VS Code. IntelliSense, task explorer, pipeline vi
 
 Full autocompletion for `turbo.json` including top-level keys, task configuration options, dependency patterns, glob patterns, and environment variables.
 
-![IntelliSense Demo](assets/demo-intellisense.gif)
+![IntelliSense Demo](assets/demo-syntax.png)
 
 ### Task Explorer
 
 Sidebar tree view showing all tasks defined in `turbo.json` with dependency relationships, cache status, inputs/outputs, and environment variables. Click any task to jump to its definition. Run tasks directly from the explorer.
 
-![Task Explorer Demo](assets/demo-task-explorer.gif)
+![Task Explorer Demo](assets/demo-task-explorer.png)
 
 ### Pipeline Visualization
 
 Visual DAG of task dependencies rendered as an interactive SVG. Color-coded nodes distinguish cached, uncached, and persistent tasks. Topological dependencies shown with dashed lines. Click any node to navigate to its definition in `turbo.json`.
 
-![Pipeline Visualization Demo](assets/demo-pipeline.gif)
+![Pipeline Visualization Demo](assets/demo-codelens.png)
 
 ### CodeLens
 
