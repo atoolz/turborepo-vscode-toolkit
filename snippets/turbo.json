@@ -1,0 +1,117 @@
+{
+  "Turbo Task": {
+    "prefix": "turbo-task",
+    "body": [
+      "\"${1:taskName}\": {",
+      "\t\"dependsOn\": [\"${2:^build}\"],",
+      "\t\"cache\": ${3|true,false|}",
+      "}"
+    ],
+    "description": "Basic Turborepo task definition"
+  },
+  "Turbo Build Task": {
+    "prefix": "turbo-build",
+    "body": [
+      "\"build\": {",
+      "\t\"dependsOn\": [\"^build\"],",
+      "\t\"inputs\": [\"\\$TURBO_DEFAULT\\$\", \".env*\"],",
+      "\t\"outputs\": [\"dist/**\", \".next/**\", \"!.next/cache/**\"],",
+      "\t\"outputLogs\": \"new-only\",",
+      "\t\"cache\": true",
+      "}"
+    ],
+    "description": "Build task with common configuration"
+  },
+  "Turbo Dev Task": {
+    "prefix": "turbo-dev",
+    "body": [
+      "\"dev\": {",
+      "\t\"dependsOn\": [\"^build\"],",
+      "\t\"cache\": false,",
+      "\t\"persistent\": true",
+      "}"
+    ],
+    "description": "Dev server task (persistent, no cache)"
+  },
+  "Turbo Lint Task": {
+    "prefix": "turbo-lint",
+    "body": [
+      "\"lint\": {",
+      "\t\"dependsOn\": [\"^build\"],",
+      "\t\"cache\": true",
+      "}"
+    ],
+    "description": "Lint task definition"
+  },
+  "Turbo Test Task": {
+    "prefix": "turbo-test",
+    "body": [
+      "\"test\": {",
+      "\t\"dependsOn\": [\"build\"],",
+      "\t\"inputs\": [\"src/**/*.ts\", \"src/**/*.tsx\", \"test/**/*.ts\"],",
+      "\t\"outputLogs\": \"full\",",
+      "\t\"cache\": true",
+      "}"
+    ],
+    "description": "Test task with custom inputs"
+  },
+  "Turbo Deploy Task": {
+    "prefix": "turbo-deploy",
+    "body": [
+      "\"deploy\": {",
+      "\t\"dependsOn\": [\"build\", \"test\", \"lint\"],",
+      "\t\"outputs\": [],",
+      "\t\"cache\": false",
+      "}"
+    ],
+    "description": "Deploy task depending on build, test, and lint"
+  },
+  "Turbo Config (Full)": {
+    "prefix": "turbo-config",
+    "body": [
+      "{",
+      "\t\"\\$schema\": \"https://turbo.build/schema.json\",",
+      "\t\"ui\": \"${1|tui,stream|}\",",
+      "\t\"tasks\": {",
+      "\t\t\"build\": {",
+      "\t\t\t\"dependsOn\": [\"^build\"],",
+      "\t\t\t\"inputs\": [\"\\$TURBO_DEFAULT\\$\", \".env*\"],",
+      "\t\t\t\"outputs\": [\"dist/**\"],",
+      "\t\t\t\"cache\": true",
+      "\t\t},",
+      "\t\t\"dev\": {",
+      "\t\t\t\"dependsOn\": [\"^build\"],",
+      "\t\t\t\"cache\": false,",
+      "\t\t\t\"persistent\": true",
+      "\t\t},",
+      "\t\t\"lint\": {",
+      "\t\t\t\"dependsOn\": [\"^build\"],",
+      "\t\t\t\"cache\": true",
+      "\t\t},",
+      "\t\t\"test\": {",
+      "\t\t\t\"dependsOn\": [\"build\"],",
+      "\t\t\t\"cache\": true",
+      "\t\t}",
+      "\t},",
+      "\t\"globalDependencies\": [\"tsconfig.json\"],",
+      "\t\"globalEnv\": [\"CI\"]",
+      "}"
+    ],
+    "description": "Full turbo.json starter configuration"
+  },
+  "Turbo Package Config": {
+    "prefix": "turbo-package",
+    "body": [
+      "{",
+      "\t\"\\$schema\": \"https://turbo.build/schema.json\",",
+      "\t\"extends\": [\"//\"],",
+      "\t\"tasks\": {",
+      "\t\t\"${1:build}\": {",
+      "\t\t\t\"outputs\": [\"${2:dist/**}\"]",
+      "\t\t}",
+      "\t}",
+      "}"
+    ],
+    "description": "Package-level turbo.json with extends"
+  }
+}

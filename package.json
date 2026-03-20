@@ -1,0 +1,150 @@
+{
+  "name": "turborepo-vscode-toolkit",
+  "displayName": "Turborepo Toolkit",
+  "description": "Complete Turborepo toolkit: IntelliSense, task explorer, pipeline visualization, and diagnostics for turbo.json",
+  "version": "0.1.3",
+  "publisher": "atoolz",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atoolz/turborepo-vscode-toolkit"
+  },
+  "bugs": {
+    "url": "https://github.com/atoolz/turborepo-vscode-toolkit/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "turborepo",
+    "turbo",
+    "monorepo",
+    "build",
+    "pipeline",
+    "vercel"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/turbo.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "turbo-json",
+        "filenames": [
+          "turbo.json"
+        ],
+        "aliases": [
+          "Turborepo Config"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "turbo-json",
+        "scopeName": "source.json.turbo",
+        "path": "./syntaxes/turbo.json.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "turbo-json",
+        "path": "./snippets/turbo.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "turborepo-toolkit.runTask",
+        "title": "Turborepo: Run Task",
+        "icon": "$(play)"
+      },
+      {
+        "command": "turborepo-toolkit.runTaskForce",
+        "title": "Turborepo: Run Task (Force)",
+        "icon": "$(debug-restart)"
+      },
+      {
+        "command": "turborepo-toolkit.showPipeline",
+        "title": "Turborepo: Show Pipeline"
+      },
+      {
+        "command": "turborepo-toolkit.refreshTasks",
+        "title": "Turborepo: Refresh Tasks",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "turborepo-toolkit.goToTaskDefinition",
+        "title": "Turborepo: Go to Task Definition"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "turborepo-toolkit",
+          "title": "Turborepo",
+          "icon": "$(layers)"
+        }
+      ]
+    },
+    "views": {
+      "turborepo-toolkit": [
+        {
+          "id": "turborepoTasks",
+          "name": "Tasks"
+        },
+        {
+          "id": "turborepoPackages",
+          "name": "Packages"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "turborepo-toolkit.refreshTasks",
+          "when": "view == turborepoTasks",
+          "group": "navigation"
+        },
+        {
+          "command": "turborepo-toolkit.showPipeline",
+          "when": "view == turborepoTasks",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "turborepo-toolkit.runTask",
+          "when": "view == turborepoTasks && viewItem == task",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "lint": "tsc --noEmit",
+    "package": "vsce package",
+    "test:e2e": "tsc -p ./tsconfig.test.json && node ./dist/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.2.2",
+    "esbuild": "^0.24.2",
+    "glob": "^13.0.6",
+    "mocha": "^11.7.5",
+    "typescript": "^5.3.3"
+  }
+}

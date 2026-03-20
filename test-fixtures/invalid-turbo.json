@@ -1,0 +1,17 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "experimentalUI": true,
+  "tasks": {
+    "build": {
+      "unknownKey": true,
+      "outputLogs": "invalid-value",
+      "cache": true,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": true,
+      "persistent": true
+    }
+  }
+}

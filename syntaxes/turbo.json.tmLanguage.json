@@ -1,0 +1,4 @@
+{
+  "scopeName": "source.json.turbo",
+  "patterns": [{ "include": "source.json" }]
+}
